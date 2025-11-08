@@ -15,7 +15,7 @@ import {
   X,
 } from "lucide-react";
 
-// 🖼️ Assets (same as before)
+// 🖼️ Assets
 import profile from "./assets/profile.png";
 import buyMinute from "./assets/buyMinute.png";
 import Learning_Management from "./assets/Learning_Management.png";
@@ -33,8 +33,9 @@ import Palindrom_checker from "./assets/Palindrom_checker.png";
 import Roman_To_Arabic_Number_Converter from "./assets/Roman_To_Arabic_Number_Converter.png";
 import Wheel_by_html_and_css from "./assets/Wheel_by_html_and_css.png";
 
-// 🧾 Data (same as before)
+// 🧾 Data
 const certifications = [cert_1, cert_2, cert_3, cert_4];
+
 const fullstackProjects = [
   {
     title: "BuyMinute E-commerce",
@@ -66,6 +67,7 @@ const fullstackProjects = [
     image: Bank,
   },
 ];
+
 const reactMiniProjects = [
   {
     title: "Real-Time Currency Converter",
@@ -82,6 +84,7 @@ const reactMiniProjects = [
     github: "https://github.com/Eyueal191/Zema_Music_Player",
   },
 ];
+
 const htmlCssMiniProjects = [
   {
     title: "Roman To Arabic Number Converter",
@@ -185,6 +188,7 @@ const Section = ({ title, Icon, projects }) => (
   </section>
 );
 
+/** Bio Section */
 const BioSection = () => (
   <section id="about" className="max-w-4xl mx-auto p-8 text-center mt-16">
     <motion.h2
@@ -202,13 +206,69 @@ const BioSection = () => (
       viewport={{ once: true }}
       transition={{ delay: 0.2 }}
     >
-      I am a passionate{" "}
-      <span className="text-red-500 font-semibold">Full-Stack Web Developer</span> and an{" "}
-      <span className="text-yellow-400 font-semibold">ALX Africa Software Engineering Graduate</span>.  
+      I am a passionate <span className="text-red-500 font-semibold">Full-Stack Web Developer</span> and an <span className="text-yellow-400 font-semibold">ALX Africa Software Engineering Graduate</span>.  
       Skilled in React, TypeScript, Node.js, Express.js, MongoDB, and modern tools like Stripe, Clerk, and Cloudinary.
     </motion.p>
   </section>
 );
+
+/** Skills Section */
+const SkillsSection = () => {
+  const knownSkills = [
+    "React",
+    "TypeScript",
+    "CSS",
+    "Tailwind CSS",
+    "Node.js",
+    "Express.js",
+    "MongoDB",
+    "PostgreSQL",
+    "JWT Authentication",
+    "Clerk OAuth2",
+    "Stripe",
+    "Cloudinary",
+    "ImageKit",
+  ];
+
+  const learningSkills = ["Next.js", "NestJS", "AWS Fundamentals"];
+
+  return (
+    <section id="skills" className="max-w-7xl mx-auto p-8 mt-16">
+      <motion.h2
+        className="text-3xl font-extrabold text-white mb-6"
+        initial={{ opacity: 0, y: -20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+      >
+        Skills
+      </motion.h2>
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+        {knownSkills.map((skill) => (
+          <motion.div
+            key={skill}
+            className="bg-gray-800 text-white rounded-xl p-3 text-center font-semibold shadow hover:shadow-red-500/50 transition transform hover:-translate-y-1 hover:scale-105"
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            {skill}
+          </motion.div>
+        ))}
+
+        {learningSkills.map((skill) => (
+          <motion.div
+            key={skill}
+            className="bg-gray-800 text-yellow-400 rounded-xl p-3 text-center italic font-semibold shadow hover:shadow-yellow-500/50 transition transform hover:-translate-y-1 hover:scale-105 opacity-80"
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            {skill} (Learning)
+          </motion.div>
+        ))}
+      </div>
+    </section>
+  );
+};
 
 /** Navbar */
 const Navbar = () => {
@@ -217,12 +277,10 @@ const Navbar = () => {
   return (
     <nav className="fixed top-0 left-0 w-full bg-neutral-900/90 backdrop-blur-md z-50 border-b border-gray-800">
       <div className="max-w-7xl mx-auto flex items-center justify-between p-4">
-        {/* Portfolio Logo Text */}
         <span className="text-3xl font-extrabold bg-gradient-to-r from-red-500 via-yellow-400 to-red-600 bg-clip-text text-transparent drop-shadow-lg">
           Portfolio
         </span>
 
-        {/* Desktop Menu */}
         <ul className="hidden md:flex gap-8 text-lg font-semibold">
           <li><a href="#about" className="hover:text-red-500 transition">About</a></li>
           <li><a href="#skills" className="hover:text-yellow-400 transition">Skills</a></li>
@@ -231,16 +289,11 @@ const Navbar = () => {
           <li><a href="#contact" className="hover:text-red-500 transition">Contact</a></li>
         </ul>
 
-        {/* Mobile Hamburger */}
-        <button
-          className="md:hidden text-white hover:text-red-500 transition"
-          onClick={() => setOpen(!open)}
-        >
+        <button className="md:hidden text-white hover:text-red-500 transition" onClick={() => setOpen(!open)}>
           {open ? <X size={28} /> : <Menu size={28} />}
         </button>
       </div>
 
-      {/* Mobile Dropdown */}
       {open && (
         <motion.div
           initial={{ opacity: 0, y: -10 }}
@@ -310,43 +363,48 @@ const App = () => {
         </motion.button>
       </header>
 
+      {/* Bio + Skills Sections */}
       <BioSection />
+      <SkillsSection />
+
+      {/* Projects Sections */}
       <Section title="Fullstack Projects" Icon={Lightbulb} projects={fullstackProjects} />
       <Section title="React Mini Projects" Icon={Atom} projects={reactMiniProjects} />
       <Section title="Core Web Development" Icon={Globe} projects={htmlCssMiniProjects} />
+
+      {/* Certifications */}
+      <section id="certifications" className="max-w-7xl mx-auto p-8 mt-16">
+        <h2 className="text-3xl font-extrabold text-white mb-8 flex items-center gap-3 border-l-4 border-yellow-500 pl-4">
+          <Award className="w-6 h-6 text-yellow-500" /> Key Certifications
+        </h2>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+          {certifications.map((cert, idx) => (
+            <motion.img
+              key={idx}
+              src={cert}
+              alt={`Cert ${idx + 1}`}
+              className="w-full h-auto rounded-xl shadow-lg hover:scale-105 transition-transform duration-300"
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+            />
+          ))}
+        </div>
+      </section>
 
       {/* Footer */}
       <footer id="contact" className="bg-gray-800 mt-20 p-8 text-center text-gray-300 w-full">
         <h4 className="text-xl font-bold text-white mb-3">Get In Touch</h4>
         <p className="mb-2">Let's connect and build something amazing:</p>
-        <p className="mb-4 text-white font-semibold">
-          📧 eyuealayalew191@gmail.com | 📞 0909040610
-        </p>
+        <p className="mb-4 text-white font-semibold">📧 eyuealayalew191@gmail.com | 📞 0909040610</p>
         <div className="flex justify-center gap-6 text-2xl mb-4">
-          <a
-            href="https://www.linkedin.com/in/eyueal-ayalew"
-            target="_blank"
-            rel="noreferrer"
-            className="text-white hover:text-blue-500"
-          >
-            <Linkedin className="w-7 h-7" />
-          </a>
-          <a
-            href="https://github.com/Eyueal191"
-            target="_blank"
-            rel="noreferrer"
-            className="text-white hover:text-gray-300"
-          >
-            <Github className="w-7 h-7" />
-          </a>
+          <a href="https://www.linkedin.com/in/eyueal-ayalew" target="_blank" rel="noreferrer" className="text-white hover:text-blue-500"><Linkedin className="w-7 h-7" /></a>
+          <a href="https://github.com/Eyueal191" target="_blank" rel="noreferrer" className="text-white hover:text-gray-300"><Github className="w-7 h-7" /></a>
         </div>
         <p className="text-sm border-t border-gray-600 pt-4 mt-4">
-          <Code className="w-4 h-4 inline mr-1 text-blue-500" /> Built with React, Tailwind &
-          Framer Motion.
+          <Code className="w-4 h-4 inline mr-1 text-blue-500" /> Built with React, Tailwind & Framer Motion.
         </p>
-        <p className="text-xs mt-1">
-          © {new Date().getFullYear()} Eyueal Ayalew. All rights reserved.
-        </p>
+        <p className="text-xs mt-1">© {new Date().getFullYear()} Eyueal Ayalew. All rights reserved.</p>
       </footer>
     </div>
   );
